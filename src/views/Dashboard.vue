@@ -7,7 +7,7 @@
       :bottom="!$vuetify.breakpoint.mdAndUp"
     >
       <v-list-item two-line>
-        <v-list-item-content class="">
+        <v-list-item-content>
           <v-list-item-title class="title" style="flex: 0 0 auto;">
             Backend as a Service
           </v-list-item-title>
@@ -16,7 +16,7 @@
             icon
             style="flex: 0 0 auto; margin-left: auto;"
           >
-            <v-icon>mdi-account-circle-outline</v-icon>
+            <v-icon>$mdiAccountCircleOutline</v-icon>
           </v-btn>
         </v-list-item-content>
       </v-list-item>
@@ -55,14 +55,14 @@ export default Vue.extend({
   data: () => ({
     group: null,
     menuItems: [
-      { name: "Monitor", to: "", icon: "mdi-monitor" },
-      { name: "Functions", icon: "mdi-function-variant" },
-      { name: "Storage", icon: "mdi-database-outline" },
-      { name: "Site", icon: "mdi-application" },
-      { name: "Settings", icon: "mdi-cog-outline" }
+      { name: "Monitor", to: "", icon: "$mdiMonitor" },
+      { name: "Functions", icon: "$mdiFunctionVariant" },
+      { name: "Storage", icon: "$mdiDatabaseOutline" },
+      { name: "Site", icon: "$mdiApplication" },
+      { name: "Settings", icon: "$mdiCogOutline" }
     ],
     menuItemsPortrait: [
-      { name: "Documentation", to: "", icon: "mdi-file-document-outline" }
+      { name: "Documentation", to: "", icon: "$mdiFileDocumentOutline" }
     ]
   })
 });

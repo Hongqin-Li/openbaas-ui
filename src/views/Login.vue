@@ -2,12 +2,11 @@
   <v-row justify="center">
     <v-col cols="12" sm="10" md="8" lg="6" style="padding: 0;">
       <v-card
-        :outlined="!$vuetify.breakpoint.mobile"
-        :elevation="$vuetify.breakpoint.mobile ? 0 : 0"
+        :elevation="$vuetify.breakpoint.mobile ? 0 : 16"
         class="mb-4"
         :class="{
           'pa-4': !$vuetify.breakpoint.mobile,
-          'mt-16': !$vuetify.breakpoint.mobile
+          'mt-8': !$vuetify.breakpoint.mobile
         }"
       >
         <p class="text-h4 mx-4 pt-12 mb-4">
@@ -21,7 +20,6 @@
           <v-text-field
             v-model="name"
             label="Your name"
-            placeholder="John Doe"
             :disabled="loading"
             required
           ></v-text-field>
@@ -29,7 +27,6 @@
           <v-text-field
             v-model="password"
             label="Password"
-            placeholder="John Doe"
             :disabled="loading"
             required
           ></v-text-field>
@@ -64,9 +61,7 @@
               @click="onClick"
             >
               <v-icon>{{
-                state == "invalid"
-                  ? "mdi-circle-edit-outline"
-                  : "mdi-arrow-right"
+                state == "invalid" ? "$mdiCircleEditOutline" : "$mdiArrowRight"
               }}</v-icon>
             </v-btn>
           </v-fab-transition>

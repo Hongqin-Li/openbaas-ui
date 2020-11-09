@@ -1054,6 +1054,11 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@mdi/js@^5.8.55":
+  version "5.8.55"
+  resolved "https://registry.npm.taobao.org/@mdi/js/download/@mdi/js-5.8.55.tgz#630bc5fafd8b1d2f6e63489a9ab170177559e41b"
+  integrity sha1-YwvF+v2LHS9uY0iamrFwF3VZ5Bs=
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.npm.taobao.org/@mrmlnc/readdir-enhanced/download/@mrmlnc/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"

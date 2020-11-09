@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="white" app>
+  <v-app-bar color="primary" dark app>
     <v-app-bar-nav-icon
       v-show="!$vuetify.breakpoint.mdAndUp"
       @click="$store.commit('toggleDrawer')"
@@ -14,24 +14,19 @@
       :loading="loading"
       :items="items"
       :search-input.sync="search"
-      :background-color="!isFocused ? 'grey lighten-3' : undefined"
       :class="isSearching ? 'rounded-b-0' : ' rounded-lg'"
       :flat="!isFocused && !isSearching"
       autocomplete="off"
       class="mx-2 mx-md-4"
       hide-details
-      solo
+      solo-inverted
       dense
       hide-no-data
+      prepend-inner-icon="$mdiMagnify"
       label="What state are you from?"
       @focus="onFocus"
       @blur="onBlur"
     >
-      <template #prepend-inner>
-        <v-icon :color="!isFocused ? 'grey' : undefined" class="ml-1 mr-2"
-          >mdi-magnify
-        </v-icon>
-      </template>
     </v-autocomplete>
 
     <template v-if="$vuetify.breakpoint.mdAndUp">
@@ -46,7 +41,7 @@
       <v-tooltip open-delay="500" bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-btn @click="onClickUser" icon v-bind="attrs" v-on="on">
-            <v-icon>mdi-account-circle-outline</v-icon>
+            <v-icon>$mdiAccountCircleOutline</v-icon>
           </v-btn>
         </template>
         <span>User</span>
@@ -55,7 +50,7 @@
       <v-tooltip open-delay="500" bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon v-bind="attrs" v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
+            <v-icon>$mdiDotsVertical</v-icon>
           </v-btn>
         </template>
         <span>Settings</span>
