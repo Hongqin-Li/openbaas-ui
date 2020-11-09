@@ -1,5 +1,9 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
+    "revision": "d405e178e163f345f1729cc0e68f36ce",
+    "url": "/openbaas-ui/404.html"
+  },
+  {
     "revision": "790ed7265e1f8d31b9ba",
     "url": "/openbaas-ui/css/chunk-vendors.67cc7dd3.css"
   },
@@ -12,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/openbaas-ui/css/login.549c2a46.css"
   },
   {
-    "revision": "293c673a4b1d515f0aca91022ba391fe",
+    "revision": "78f1623c9a33e9aa3abe64fe82ece762",
     "url": "/openbaas-ui/index.html"
   },
   {
