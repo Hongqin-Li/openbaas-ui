@@ -16,6 +16,7 @@ jobs:
       with:
         node-version: "12.x"
 
+    - run: mv ./public/index-gh.html ./public/index.html
     - run: yarn
     - run: yarn build
 
