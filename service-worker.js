@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/openbaas-ui/precache-manifest.c66d2824ceaef42b0220efc210e4c7e6.js"
+  "/openbaas-ui/precache-manifest.5b9b764d72fc0504a9b8b201f0278cfa.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "openbaas-ui"});
