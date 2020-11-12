@@ -1,9 +1,14 @@
 import {
   mdiAccountCircleOutline,
   mdiArrowRight,
+  mdiArrowLeft,
   mdiCircleEditOutline,
+  mdiContentCopy,
   mdiDotsVertical,
+  mdiEyeOutline,
+  mdiRefresh,
   mdiMagnify,
+  mdiMenu,
   mdiMonitor,
   mdiFunctionVariant,
   mdiDatabaseOutline,
@@ -17,10 +22,17 @@ export const icons = {
   values: {
     mdiAccountCircleOutline,
     mdiArrowRight,
+    mdiArrowLeft,
+
     mdiApplication,
     mdiCircleEditOutline,
+    mdiContentCopy,
+
     mdiDotsVertical,
+    mdiEyeOutline,
+    mdiRefresh,
     mdiMagnify,
+    mdiMenu,
     mdiMonitor,
     mdiFunctionVariant,
     mdiDatabaseOutline,

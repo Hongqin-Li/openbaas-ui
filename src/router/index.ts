@@ -6,24 +6,40 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: "/dashboard",
-    name: "Dashboard",
+    name: "dashboard",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "dashboard" */ "../views/Dashboard.vue")
+      import(/* webpackChunkName: "dashboard" */ "../views/TheDashboard.vue"),
+    children: [
+      {
+        path: "pages",
+        name: "dashboard",
+        component: () =>
+          import(/* webpackChunkName: "dashboard" */ "../views/ThePages.vue")
+      },
+      {
+        path: "functions",
+        name: "dashboard",
+        component: () =>
+          import(
+            /* webpackChunkName: "dashboard" */ "../views/TheFunctions.vue"
+          )
+      }
+    ]
   },
   {
     path: "/login",
-    name: "Login",
+    name: "login",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Login.vue")
+      import(/* webpackChunkName: "login" */ "../views/TheLogin.vue")
   },
   {
     path: "/signup",
-    name: "Login",
+    name: "signup",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Login.vue")
+      import(/* webpackChunkName: "login" */ "../views/TheSignup.vue")
   }
 ];
 

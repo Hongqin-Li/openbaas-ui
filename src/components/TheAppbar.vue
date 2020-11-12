@@ -1,16 +1,14 @@
 <template>
   <v-app-bar color="primary" dark app>
-    <v-app-bar-nav-icon
-      v-show="!$vuetify.breakpoint.mdAndUp"
-      @click="$store.commit('toggleDrawer')"
-    ></v-app-bar-nav-icon>
-    <v-toolbar-title v-show="$vuetify.breakpoint.mdAndUp">{{
-      title
-    }}</v-toolbar-title>
+    <v-btn icon v-show="showNavbtn" @click="onClickNav">
+      <v-icon>{{ navIcon }}</v-icon>
+    </v-btn>
+    <v-toolbar-title v-show="showTitle">{{ title }}</v-toolbar-title>
     <v-spacer />
 
     <v-autocomplete
       v-model="select"
+      v-show="showSearchbar"
       :loading="loading"
       :items="items"
       :search-input.sync="search"
@@ -65,7 +63,6 @@ import Vue from "vue";
 export default Vue.extend({
   name: "Appbar",
   data: () => ({
-    title: "OpenBaas",
     loading: false,
     items: [] as string[],
     search: null,
@@ -77,6 +74,77 @@ export default Vue.extend({
   watch: {
     search(val) {
       val && val !== this.select && this.querySelections(val);
+    }
+  },
+  computed: {
+    state() {
+      switch (this.$route.name) {
+        case "dashboard":
+          return "MainSearch";
+        case "login":
+          return "OpenPage";
+        case "signup":
+          return "OpenPage";
+        default:
+          return "MainSearch";
+      }
+    },
+    title() {
+      switch (this.$route.name) {
+        case "dashboard":
+          return "OpenBaaS";
+        case "login":
+          return "Log in";
+        case "signup":
+          return "Sign up";
+        default:
+          return "";
+      }
+    },
+    navIcon() {
+      switch (this.$route.name) {
+        case "dashboard":
+          return "$mdiMenu";
+        default:
+          return "$mdiArrowLeft";
+      }
+    },
+    showNavbtn() {
+      if (this.$vuetify.breakpoint.mobile) {
+        return true;
+      }
+      return false;
+    },
+    showTitle() {
+      if (this.$vuetify.breakpoint.mobile) {
+        switch (this.$route.name) {
+          case "dashboard":
+            return false;
+          case "login":
+            return true;
+          case "signup":
+            return true;
+          default:
+            return false;
+        }
+      } else return true;
+    },
+    showSearchbar() {
+      if (this.$vuetify.breakpoint.mobile) {
+        switch (this.$route.name) {
+          case "dashboard":
+            return true;
+          default:
+            return false;
+        }
+      } else {
+        switch (this.$route.name) {
+          case "dashboard":
+            return true;
+          default:
+            return false;
+        }
+      }
     }
   },
   methods: {
@@ -91,7 +159,13 @@ export default Vue.extend({
       }, 500);
     },
     onClickUser() {
-      this.$router.push("login");
+      this.$router.push("/login");
+      console.log(this.$route.name);
+    },
+    onClickNav() {
+      if (this.$route.name === "dashboard") this.$store.commit("toggleDrawer");
+      else if (this.$route.name === "login") this.$router.back();
+      else this.$router.back();
     },
     onFocus() {
       this.isFocused = true;
