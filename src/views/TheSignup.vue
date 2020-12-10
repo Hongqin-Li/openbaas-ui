@@ -102,10 +102,11 @@ export default Vue.extend({
         this.loading = true;
         signup(this.name, this.password, this.email)
           .then(d => {
-            console.log(d);
+            this.$toast.success("Sign up successfully.");
+            this.$router.push("/login");
           })
           .catch(e => {
-            console.log(e);
+            this.$toast.error(e.response.data.error);
           })
           .finally(() => {
             this.loading = false;

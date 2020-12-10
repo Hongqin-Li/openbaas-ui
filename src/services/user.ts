@@ -1,4 +1,5 @@
 import { api } from "./config";
+import $store from "../store";
 
 // TODO: use email
 export function signup(name: string, pwd: string, email: string) {
@@ -37,7 +38,11 @@ export function login(name: string, pwd: string, rememberMe: boolean) {
           }
         }
       )
-      .then(d => resolve(d))
+      .then(d => {
+        $store.commit("updateSessionToken", d.data.sessionToken);
+        $store.commit("updateUserId", d.data.objectId);
+        resolve(d);
+      })
       .catch(e => reject(e));
   });
 }

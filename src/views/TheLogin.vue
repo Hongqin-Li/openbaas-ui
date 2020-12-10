@@ -54,11 +54,11 @@
                 :loading="state == 'loading'"
                 fab
                 large
-                dark
                 :fixed="$vuetify.breakpoint.mobile"
                 bottom
                 right
-                color="secondary"
+                :dark="state === 'valid' ? true : false"
+                :color="state === 'valid' ? 'secondary' : 'white'"
                 @click="onClick"
               >
                 <v-icon>{{
@@ -99,11 +99,14 @@ export default Vue.extend({
       if (this.state === "valid") {
         this.loading = true;
         login(this.name, this.password, this.rememberMe)
-          .then(d => {
-            console.log(d);
+          .then((d: any) => {
+            this.$toast.success("Welcome back!");
+            this.$store.commit("updateSessionToken", d.data.sessionToken);
+            // FIXME: route to
+            this.$router.push("/dashboard");
           })
           .catch(e => {
-            console.log(e);
+            this.$toast.error("User not found  or password error.");
           })
           .finally(() => {
             this.loading = false;

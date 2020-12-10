@@ -5,6 +5,10 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 
+// Global Plugins
+import Toast from "./plugins/Toast";
+Vue.use(Toast);
+
 Vue.config.productionTip = false;
 
 new Vue({
