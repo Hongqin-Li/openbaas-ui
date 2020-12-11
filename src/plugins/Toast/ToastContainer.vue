@@ -1,10 +1,17 @@
 <template>
-  <transition-group name="toast" tag="div" class="container">
+  <transition-group
+    name="toast"
+    tag="div"
+    class="container"
+    :style="{ 'pointer-events': $root.toasts.length > 0 ? 'all' : 'none' }"
+  >
     <div
       class="toast-item-container v-application"
       v-for="i in $root.toasts"
       :key="i.id"
-      :style="{ color: i.color }"
+      :style="{
+        color: i.color
+      }"
       @click="handleClick"
     >
       <div class="toast-item" :style="i.style">
@@ -69,7 +76,7 @@ $slot-height: 1.4em+2 * $spacing;
   transition: transform 0.2s;
 
   &:hover {
-    transform: scale(0.9);
+    transform: scale(0.97);
   }
 }
 .toast-item {

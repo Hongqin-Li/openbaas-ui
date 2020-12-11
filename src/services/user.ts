@@ -18,7 +18,12 @@ export function signup(name: string, pwd: string, email: string) {
         }
       )
       .then(d => resolve(d))
-      .catch(e => reject(e));
+      .catch(e => {
+        if (!e.response) {
+          e = { response: { data: { error: "Network error" } } };
+        }
+        reject(e);
+      });
   });
 }
 
@@ -43,6 +48,11 @@ export function login(name: string, pwd: string, rememberMe: boolean) {
         $store.commit("updateUserId", d.data.objectId);
         resolve(d);
       })
-      .catch(e => reject(e));
+      .catch(e => {
+        if (!e.response) {
+          e = { response: { data: { error: "Network error" } } };
+        }
+        reject(e);
+      });
   });
 }

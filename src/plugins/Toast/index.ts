@@ -74,9 +74,6 @@ const Toast = {
     };
 
     Vue.prototype.$toast = {
-      // toasts: toasts,
-
-      // show: show,
       success(msg: string) {
         show({ msg: msg, style: "background: #cde2d4; color: #31363b;" });
       },

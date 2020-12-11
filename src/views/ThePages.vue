@@ -6,7 +6,13 @@
           <v-card-title>
             Upload website
             <v-spacer />
-            <v-btn small depressed color="primary" @click="handleUpload"
+            <v-btn
+              small
+              depressed
+              color="primary"
+              @click="handleUpload"
+              :loading="deploying"
+              :disabled="deploying"
               >Deploy</v-btn
             >
           </v-card-title>
@@ -70,6 +76,9 @@
             History
           </v-card-title>
           <v-data-table :headers="historyHeaders" :items="historyItems">
+            <template v-slot:[`item.fname`]="{ item }">
+              <a :href="item.url">{{ item.fname }}</a>
+            </template>
             <template v-slot:[`item.status`]="{}">
               <v-btn small depressed> rollback </v-btn>
             </template>
@@ -82,7 +91,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { uploadPage, getPageList } from "@/services/page";
+import { uploadPage, getPageList, deployPage } from "@/services/page";
 
 export default Vue.extend({
   data: () => ({
@@ -92,6 +101,7 @@ export default Vue.extend({
     showToken: false,
     pageTokenBtnSel: 0,
     file: undefined,
+    deploying: false,
 
     historyHeaders: [
       { text: "Version", align: "start", sortable: true, value: "version" },
@@ -99,30 +109,35 @@ export default Vue.extend({
       { text: "Upload time", align: "", sortable: true, value: "time" },
       { text: "Status", align: "", sortable: false, value: "status" }
     ],
-    historyItems: [
-      { version: "3", fname: "index.zip", time: "2020-01-30", status: "x" },
-      { version: "2", fname: "index.zip", time: "2020-01-20", status: "x" },
-      { version: "1", fname: "index.zip", time: "2020-01-10", status: "x" }
-    ]
+    historyItems: []
   }),
   created() {
     this.syncPageList();
   },
   methods: {
     handleUpload() {
-      const form = new FormData();
-      form.append("index.zip", this.file || "", "index.zip");
-      uploadPage(form)
-        .then(d => {
-          console.log(d);
-          this.syncPageList();
-        })
-        .catch(e => {
-          this.$toast.error(e.response.data.error);
-        })
-        .finally(() => {
-          console.log("xx");
-        });
+      if (!this.deploying) {
+        this.deploying = true;
+        uploadPage(this.file)
+          .then((d: any) => {
+            console.log(d.data.url);
+            deployPage(d.data.url)
+              .then(data => {
+                this.$toast.success("Deploy successfully");
+              })
+              .catch(e => {
+                this.$toast.error(e.response.data.error);
+              })
+              .finally(() => {
+                this.deploying = false;
+              });
+            this.syncPageList();
+          })
+          .catch(e => {
+            this.$toast.error(e.response.data.error);
+            this.deploying = false;
+          });
+      }
     },
     syncPageList() {
       getPageList().then((d: any) => {
@@ -131,6 +146,7 @@ export default Vue.extend({
           version: i + 1,
           fname: x.file.name,
           time: x.updatedAt,
+          url: x.file.url,
           status: "x"
         }));
         console.log(d);

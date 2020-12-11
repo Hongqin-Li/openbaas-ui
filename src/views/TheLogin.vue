@@ -101,12 +101,11 @@ export default Vue.extend({
         login(this.name, this.password, this.rememberMe)
           .then((d: any) => {
             this.$toast.success("Welcome back!");
-            this.$store.commit("updateSessionToken", d.data.sessionToken);
             // FIXME: route to
             this.$router.push("/dashboard");
           })
           .catch(e => {
-            this.$toast.error("User not found  or password error.");
+            this.$toast.error(e.response.data.error);
           })
           .finally(() => {
             this.loading = false;

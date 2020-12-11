@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <TheAppbar />
+    <TheDrawer v-if="$vuetify.breakpoint.mobile" />
     <v-main>
       <!-- Provides the application the proper gutter -->
       <!-- If using vue-router -->
@@ -14,11 +15,13 @@
 <script lang="ts">
 import Vue from "vue";
 import TheAppbar from "@/components/TheAppbar.vue";
+import TheDrawer from "./components/TheDrawer.vue";
 
 export default Vue.extend({
   name: "App",
   components: {
-    TheAppbar
+    TheAppbar,
+    TheDrawer
   }
 });
 </script>
