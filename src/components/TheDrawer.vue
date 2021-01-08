@@ -64,7 +64,7 @@ export default Vue.extend({
     menuItemsPortrait: [
       {
         name: "Login",
-        icon: "$mdiAccountCircleOutline",
+        icon: "$mdiAccountCircleOutline"
       },
       { name: "Documentation", to: "/doc", icon: "$mdiFileDocumentOutline" }
     ]
@@ -72,8 +72,7 @@ export default Vue.extend({
   methods: {
     onClickItem(i: any) {
       // FIXME: logged in case
-      if (i.name === 'Login')
-        this.$router.push("/login");
+      if (i.name === "Login") this.$router.push("/login");
     }
   }
 });

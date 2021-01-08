@@ -15,13 +15,13 @@ const routes: Array<RouteConfig> = [
     children: [
       {
         path: "pages",
-        name: "dashboard",
+        name: "dashboard/page",
         component: () =>
           import(/* webpackChunkName: "dashboard" */ "../views/ThePages.vue")
       },
       {
         path: "functions",
-        name: "dashboard",
+        name: "dashboard/function",
         component: () =>
           import(
             /* webpackChunkName: "dashboard" */ "../views/TheFunctions.vue"

@@ -2,14 +2,13 @@
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 
 module.exports = {
-  chainWebpack: config => {
-    config.plugin("monaco-editor").use(MonacoWebpackPlugin, [
-      {
-        // Languages are loaded on demand at runtime
+  configureWebpack: {
+    plugins: [
+      new MonacoWebpackPlugin({
         // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
-        languages: ["json", "javascript", "html", "xml"]
-      }
-    ]);
+        languages: ["javascript", "css", "html", "typescript", "json"]
+      })
+    ]
   },
   transpileDependencies: ["vuetify"],
   publicPath: process.env.NODE_ENV === "production" ? "/openbaas-ui/" : "/"

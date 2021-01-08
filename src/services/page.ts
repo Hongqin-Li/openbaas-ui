@@ -1,13 +1,52 @@
 import { api } from "./config";
 import $store from "../store";
 
-export function uploadPage(file: File | undefined) {
+export function uploadPage(file: File) {
   return new Promise((resolve, reject) => {
     api
-      .post(`/files/index.zip`, file, {
+      .post(`/files/${file.name}`, file, {
         headers: {
-          "X-Parse-Session-Token": `${$store.state.sessionToken}`
+          "X-Parse-Session-Token": `${$store.state.user.token}`
         }
+      })
+      .then(d => resolve(d))
+      .catch(e => {
+        if (!e.response) {
+          e = { response: { data: { error: "Network error" } } };
+        }
+        reject(e);
+      });
+  });
+}
+
+export function deletePage(pageId: string) {
+  return new Promise((resolve, reject) => {
+    api
+      .post(
+        `/functions/delete-page`,
+        { pageId },
+        {
+          headers: {
+            "X-Parse-Session-Token": `${$store.state.user.token}`
+          }
+        }
+      )
+      .then(d => resolve(d))
+      .catch(e => {
+        if (!e.response) {
+          e = { response: { data: { error: "Network error" } } };
+        }
+        reject(e);
+      });
+  });
+}
+
+export function getMyPageUrl() {
+  const uid: string = $store.state.user.id;
+  return new Promise((resolve, reject) => {
+    api
+      .post(`/functions/page-url`, {
+        uid
       })
       .then(d => resolve(d))
       .catch(e => {
@@ -22,15 +61,15 @@ export function uploadPage(file: File | undefined) {
 export function getPageList() {
   return new Promise((resolve, reject) => {
     api
-      .get(`/classes/UserPage`, {
+      .get(`/classes/UserFile`, {
         params: {
           where: {
-            createdBy: $store.state.userId
+            createdBy: $store.state.user.id
           }
         },
         headers: {
           "X-Parse-Revocable-Session": 1,
-          "X-Parse-Session-Token": `${$store.state.sessionToken}`
+          "X-Parse-Session-Token": `${$store.state.user.token}`
         }
       })
       .then(d => resolve(d))
@@ -54,7 +93,7 @@ export function deployPage(url: string) {
         {
           headers: {
             "X-Parse-Revocable-Session": 1,
-            "X-Parse-Session-Token": `${$store.state.sessionToken}`
+            "X-Parse-Session-Token": `${$store.state.user.token}`
           }
         }
       )
@@ -80,7 +119,7 @@ export function updatePageConfig(data: string) {
         {
           headers: {
             "X-Parse-Revocable-Session": 1,
-            "X-Parse-Session-Token": `${$store.state.sessionToken}`
+            "X-Parse-Session-Token": `${$store.state.user.token}`
           }
         }
       )

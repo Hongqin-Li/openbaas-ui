@@ -44,8 +44,25 @@ export function login(name: string, pwd: string, rememberMe: boolean) {
         }
       )
       .then(d => {
-        $store.commit("updateSessionToken", d.data.sessionToken);
-        $store.commit("updateUserId", d.data.objectId);
+        console.log("login return data", d.data);
+        $store.commit("updateUser", d.data);
+        resolve(d);
+      })
+      .catch(e => {
+        if (!e.response) {
+          e = { response: { data: { error: "Network error" } } };
+        }
+        reject(e);
+      });
+  });
+}
+
+export function syncUser() {
+  return new Promise((resolve, reject) => {
+    api
+      .get(`/users/${$store.state.user.id}`)
+      .then(d => {
+        $store.commit("updateUser", d.data);
         resolve(d);
       })
       .catch(e => {

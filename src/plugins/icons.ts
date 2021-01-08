@@ -1,3 +1,4 @@
+// See https://cdn.materialdesignicons.com/5.8.55/
 import {
   mdiAccountCircleOutline,
   mdiArrowRight,
@@ -14,7 +15,17 @@ import {
   mdiDatabaseOutline,
   mdiApplication,
   mdiCogOutline,
-  mdiFileDocumentOutline
+  mdiFileDocumentOutline,
+  mdiTrashCanOutline,
+  mdiUpload,
+  mdiClose,
+  mdiCheckCircle,
+  mdiShareVariant,
+  mdiShare,
+  mdiLinkVariant,
+  mdiCloudUploadOutline,
+  mdiPlus,
+  mdiFileOutline
 } from "@mdi/js";
 
 export const icons = {
@@ -37,6 +48,16 @@ export const icons = {
     mdiFunctionVariant,
     mdiDatabaseOutline,
     mdiCogOutline,
-    mdiFileDocumentOutline
+    mdiFileDocumentOutline,
+    mdiTrashCanOutline,
+    mdiUpload,
+    mdiCheckCircle,
+    mdiClose,
+    mdiShareVariant,
+    mdiShare,
+    mdiLinkVariant,
+    mdiCloudUploadOutline,
+    mdiPlus,
+    mdiFileOutline
   }
 };
