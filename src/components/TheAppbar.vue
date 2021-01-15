@@ -3,7 +3,7 @@
     <v-btn icon v-show="showNavbtn" @click="onClickNav">
       <v-icon>{{ navIcon }}</v-icon>
     </v-btn>
-        <the-function-dialog />
+    <the-function-dialog />
 
     <v-toolbar-title v-show="showTitle">{{ title }}</v-toolbar-title>
     <v-spacer />
@@ -87,7 +87,7 @@ interface SearchListItem {
 export default Vue.extend({
   name: "Appbar",
   components: {
-    TheFunctionDialog,
+    TheFunctionDialog
   },
   data: () => ({
     loading: false,

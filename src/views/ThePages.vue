@@ -210,7 +210,7 @@ export default Vue.extend({
         deployPage(item.url)
           .then((resp: any) => {
             this.$toast.success("Deploy successfully");
-            console.log("deployPage url", resp.data.result.url);
+            console.log("deployPage url", resp.data.url);
             this.syncPageInfo();
           })
           .catch(e => {
@@ -249,9 +249,8 @@ export default Vue.extend({
     syncPageInfo() {
       getMyPageUrl()
         .then((d: any) => {
-          console.log("getMyPageUrl", d.data);
-          this.pageUrl = d.data.result.pageUrl;
-          this.pageSourceUrl = d.data.result.pageSourceUrl;
+          this.pageUrl = d.data.pageUrl;
+          this.pageSourceUrl = d.data.pageSourceUrl;
         })
         .catch(e => {
           console.log("syncPageInfo err", e);
@@ -259,15 +258,15 @@ export default Vue.extend({
     },
     syncPageList() {
       getPageList().then((d: any) => {
-        const items = d.data.results;
+        const items = d.data;
         this.historyItems = items.map(
           (x: any, i: number) =>
             ({
               version: i + 1,
               id: x.objectId,
-              fname: x.fileName,
+              fname: x.name,
               time: dayjs(x.updatedAt).format("YYYY-MM-DD"),
-              url: x.file.url,
+              url: x.url,
               deploying: false,
               deleting: false
             } as PageListItem)

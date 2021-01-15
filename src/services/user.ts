@@ -30,19 +30,16 @@ export function signup(name: string, pwd: string, email: string) {
 export function login(name: string, pwd: string, rememberMe: boolean) {
   return new Promise((resolve, reject) => {
     api
-      .post(
-        "/login",
-        {
+      .get("/login", {
+        headers: {
+          // FIXME: Not tested.
+          "X-Parse-Revocable-Session": rememberMe ? 1 : 0
+        },
+        params: {
           username: name,
           password: pwd
-        },
-        {
-          headers: {
-            // FIXME: Not tested.
-            "X-Parse-Revocable-Session": rememberMe ? 1 : 0
-          }
         }
-      )
+      })
       .then(d => {
         console.log("login return data", d.data);
         $store.commit("updateUser", d.data);

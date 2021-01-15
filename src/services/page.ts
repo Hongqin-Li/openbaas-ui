@@ -9,7 +9,10 @@ export function uploadPage(file: File) {
           "X-Parse-Session-Token": `${$store.state.user.token}`
         }
       })
-      .then(d => resolve(d))
+      .then(d => {
+        console.log("upload page resp", d);
+        resolve(d);
+      })
       .catch(e => {
         if (!e.response) {
           e = { response: { data: { error: "Network error" } } };
@@ -22,15 +25,11 @@ export function uploadPage(file: File) {
 export function deletePage(pageId: string) {
   return new Promise((resolve, reject) => {
     api
-      .post(
-        `/functions/delete-page`,
-        { pageId },
-        {
-          headers: {
-            "X-Parse-Session-Token": `${$store.state.user.token}`
-          }
+      .delete(`/classes/UserFile/${pageId}`, {
+        headers: {
+          "X-Parse-Session-Token": `${$store.state.user.token}`
         }
-      )
+      })
       .then(d => resolve(d))
       .catch(e => {
         if (!e.response) {
@@ -48,7 +47,10 @@ export function getMyPageUrl() {
       .post(`/functions/page-url`, {
         uid
       })
-      .then(d => resolve(d))
+      .then(d => {
+        console.log("get my page url resp", d);
+        resolve(d);
+      })
       .catch(e => {
         if (!e.response) {
           e = { response: { data: { error: "Network error" } } };
@@ -62,17 +64,15 @@ export function getPageList() {
   return new Promise((resolve, reject) => {
     api
       .get(`/classes/UserFile`, {
-        params: {
-          where: {
-            createdBy: $store.state.user.id
-          }
-        },
         headers: {
           "X-Parse-Revocable-Session": 1,
           "X-Parse-Session-Token": `${$store.state.user.token}`
         }
       })
-      .then(d => resolve(d))
+      .then(d => {
+        console.log("getPageList resp", d);
+        resolve(d);
+      })
       .catch(e => {
         if (!e.response) {
           e = { response: { data: { error: "Network error" } } };
